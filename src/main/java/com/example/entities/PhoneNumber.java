@@ -25,7 +25,7 @@ public class PhoneNumber {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int number;
+    private String number;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Student student;
