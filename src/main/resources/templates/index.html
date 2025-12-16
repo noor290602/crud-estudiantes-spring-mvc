@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de estudiantes</title>
+
+    <link rel="icon" type="image/jpeg" th:href="@{/images/techgemini-logo.jpg}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <style type="text/css">
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Inter", sans-serif;    
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2em;
+            background-color: rgba(0, 112, 173);
+        }
+
+        #titulo {
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            gap: 1em;
+            width: 100%;
+            padding: 20px 10px;
+            margin-bottom: 1em;
+            background-color: white;
+
+            img{
+                width: 36px;
+                height: auto;
+            };
+        }
+
+        #titulo p {
+            font-size: 2em;
+        }
+
+        h1 {
+            color: rgba(0, 112, 173);
+            text-align: center;
+            font-weight: bolder;
+        }
+
+        .iconos-button {
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            padding: 10px 10px;
+            border: 2px solid rgba(18, 171, 219);
+            background-color: rgba(0, 112, 173);
+
+            a {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 8px;
+                text-decoration: none;
+                color: white;
+            }
+
+            &:hover {
+                background-color: rgba(18, 171, 219);
+                color: white;
+                cursor: pointer;
+
+                a span {
+                    color: white;
+                }
+            }
+        }
+
+        footer {
+            position: absolute;
+            bottom: 10px;
+            color: white;
+            font-size: 0.9em;
+            font-weight: lighter;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="titulo">
+        <img th:src="@{images/techgemini-logo.jpg}" alt="TechGemini icon">
+        <h1>Techgemini University Managment 🏫</h1>
+    </div>
+    <div class="iconos-button">
+        <a th:href="@{/students/list}">
+            <span>Student list</span>
+        </a>
+    </div>
+
+    <footer>&copy;Copyright 2025-2026 | Noor Aloune Sagouma</footer>
+</body>
+</html>

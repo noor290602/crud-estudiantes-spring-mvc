@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student list</title>
+    <link rel="icon" type="image/jpeg" th:href="@{/images/techgemini-logo.jpg}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+    <style type="text/css">
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;    
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2em;
+        background-color: rgba(0, 112, 173);
+    }
+
+   
+    #title {
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      gap: 1em;
+
+      img{
+          width: 36px;
+          height: auto;
+      };
+    }
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1em;
+        width: 100%;
+        padding: 20px 10px;
+        margin-bottom: 1em;
+        background-color: white;
+    }
+
+    #title p {
+        font-size: 2em;
+    }
+
+    h1 {
+        color: rgba(0, 112, 173);
+        text-align: center;
+        font-weight: bolder;
+    }
+
+    .iconos-button {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        border-radius: 8px;
+        color: white;
+        font-weight: bold;
+        padding: 10px 10px;
+        border: 2px solid rgba(18, 171, 219);
+        background-color: rgba(0, 112, 173);
+
+        a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: white;
+        }
+
+        &:hover {
+            background-color: rgba(18, 171, 219);
+            color: white;
+            cursor: pointer;
+
+            a span {
+                color: white;
+            }
+        }
+    }
+
+    .iconos-button img {
+        filter: brightness(0) invert(1); 
+    }
+
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 10px 25px;
+        color: white;
+    }
+
+    th {
+        background-color: rgba(18, 171, 219);
+        color: white;
+        border: solid black 1px;
+        font-weight: bold;
+    }
+
+    .sin-estilo, table {
+        border-width: 0 !important;
+        background-color: transparent;
+        padding: 20px;
+    }
+
+    .texto-bold {
+        font-weight: bold;
+    }
+
+    footer {
+        position: absolute;
+        bottom: 10px;
+        color: white;
+        font-size: 0.9em;
+        font-weight: lighter;
+    }
+
+</style>
+</head>
+<body>
+    <header>
+        <div id="title">
+            <img th:src="@{/images/techgemini-logo.jpg}" alt="Techgemini logo">
+            <h1>Student list 🏫</h1>
+        </div>
+        <div class="iconos-button">
+            <a th:href="@{/students}">
+                <img th:src="@{/images/svg/volver.svg}" alt="Add icon">
+                <span>Back to home</span>
+            </a>
+        </div>
+    </header>
+
+    <div class="iconos-button">
+        <a th:href="@{/students/add}">
+            <img th:src="@{/images/svg/add.svg}" alt="Student icon">
+            <span>Add student</span>
+        </a>
+    </div>
+   
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Faculty Matricularion Date</th>
+                    <th>Gender</th>
+                    <th class="sin-estilo"></th>
+                    <th class="sin-estilo"></th>
+                    <th class="sin-estilo"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="student : ${students}">
+                    <td th:text="${student.id}" class="texto-bold"></td>
+                    <td th:text="${student.name}"></td>
+                    <td th:text="${student.firstLastName + ' ' + student.secondLastName}"></td>
+                    <td th:text="${student.facultyMatriculationDate}"></td>
+                    <td th:text="${student.gender}"></td>
+                    <td class="sin-estilo">
+                        <div class="iconos-button">
+                            <a th:href="@{'/students/view/' + ${student.id}}">
+                                <img th:src="@{/images/svg/visibility.svg}" alt="Eye icon">
+                            </a>
+                        </div>
+                    </td>
+                    <td class="sin-estilo">
+                        <div class="iconos-button">
+                            <a th:href="@{'/students/update/' + ${student.id}}">
+                                <img th:src="@{/images/svg/edit.svg}" alt="Update icon">
+                            </a>
+                        </div>
+                    </td>
+                    <td class="sin-estilo">
+                        <div class="iconos-button">
+                            <a th:href="@{'/students/delete/' + ${student.id}}">
+                                <img th:src="@{/images/svg/delete.svg}" alt="Delete icon">
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer>&copy;Copyright 2025-2026 | Noor Aloune Sagouma</footer>
+
+</body>
+
+</html>

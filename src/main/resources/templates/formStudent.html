@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form student</title>
+      <link rel="icon" type="image/jpeg" th:href="@{/images/techgemini-logo.jpg}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+<style type="text/css">
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;    
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2em;
+        background-color: rgba(0, 112, 173);
+    }
+
+    #title {
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      gap: 1em;
+
+      img{
+          width: 36px;
+          height: auto;
+      };
+    }
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1em;
+        width: 100%;
+        padding: 20px 10px;
+        margin-bottom: 1em;
+        background-color: white;
+    }
+
+    #title p {
+        font-size: 2em;
+    }
+
+    h1 {
+        color: rgba(0, 112, 173);
+        text-align: center;
+        font-weight: bolder;
+    }
+
+    .iconos-button {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        border-radius: 8px;
+        color: white;
+        font-weight: bold;
+        padding: 10px 10px;
+        border: 2px solid rgba(18, 171, 219);
+        background-color: rgba(0, 112, 173);
+
+        a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: white;
+        }
+
+        &:hover {
+            background-color: rgba(18, 171, 219);
+            color: white;
+            cursor: pointer;
+
+            a span {
+                color: white;
+            }
+        }
+    }
+
+    .iconos-button img {
+        filter: brightness(0) invert(1); 
+    }
+
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 10px 25px;
+        color: white;
+    }
+
+    th {
+        background-color: rgba(18, 171, 219);
+        color: white;
+        border: solid black 1px;
+        font-weight: bold;
+    }
+
+    .sin-estilo, table {
+        border-width: 0 !important;
+        background-color: transparent;
+        padding: 20px;
+    }
+
+    .texto-bold {
+        font-weight: bold;
+    }
+
+    fieldset {
+        border-radius: 8px;
+        border: 1px solid rgba(0, 112, 173);
+        padding: 10px;
+        margin-bottom: 10px;
+
+        legend {
+            padding: 0px 10px;
+        }
+    }
+
+    form {
+        padding: 1em;
+        border-radius: 24px;
+        border: 5px solid rgb(0, 87, 134);
+        background-color: white;
+        width: 60%;
+
+        label {
+            margin-right: 10px;
+        }
+    
+        div {
+            margin-bottom: 15px;
+        }
+    }
+
+    .btnSubmit {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 2em;
+
+        button {
+            background-color: rgba(0, 112, 173);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+
+            &:hover {
+                background-color: rgba(18, 171, 219);
+                color: white;
+            }
+        }
+    }
+
+    input {
+        padding: 5px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+    }
+
+    footer {
+        position: absolute;
+        bottom: 10px;
+        color: white;
+        font-size: 0.9em;
+        font-weight: lighter;
+    }
+
+</style>
+</head>
+<body>
+  <header>
+    <div id="title">
+        <img th:src="@{/images/techgemini-logo.jpg}" alt="Techgemini logo">
+        <h1>Add new student 🏫</h1>
+    </div>
+    <div class="iconos-button">
+        <a th:href="@{/students/list}">
+            <img th:src="@{/images/svg/volver.svg}" alt="Add icon">
+            <span>Back to student list</span>
+        </a>
+    </div>    
+  </header>
+
+  <form th:action="@{/students/save}" th:object="${student}" method="post">
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" th:field="*{name}" required>
+        </div>
+        <div>
+            <label for="firstLastName">First surname:</label>
+            <input type="text" id="firstLastName" th:field="*{firstLastName}" required>
+        </div>
+         <div>
+            <label for="secondLastName">Second surname:</label>
+            <input type="text" id="secondLastName" th:field="*{secondLastName}" required>
+        </div>
+         <div>
+            <fieldset>
+                <legend>Gender:</legend>
+                <input type="radio" id="male" th:field="*{gender}" value="MALE">
+                <label for="male">Male</label><br>
+                <input type="radio" id="female" th:field="*{gender}" value="FEMALE">
+                <label for="female">Female</label><br>
+                <input type="radio" id="other" th:field="*{gender}" value="OTHER">
+                <label for="other">Other</label>
+            </fieldset>
+        </div>
+          <div>
+            <label for="faculties">Faculties:</label>
+            <select id="faculties" th:field="*{faculty}">
+                <option value="" selected>Choose an option please...</option>
+                <option th:each="f : ${listFaculties}" 
+                        th:value="${f.id}" 
+                        th:text="${f.name}"
+                        >
+                </option>
+            </select>
+        </div>
+        <div>
+            <label for="facultyMatriculationDate">Faculty Matriculation Date:</label>
+            <input type="date" name="facultyMatriculationDate" id="facultyMatriculationDate" th:field="*{facultyMatriculationDate}" required>
+        </div>
+        <div>
+            <label for="phoneNumbers">Phone number(s): </label>
+            <input type="text" id="phoneNumbers" name="phoneNumbersString" placeholder="Separate multiple phone number with ';'" th:value="${phoneNumbersString}" size="50" required>
+        </div>
+        <div>
+            <label for="emails">Email address(es): </label>
+            <input type="text" id="emails" name="emailsString" placeholder="Separate multiple email addresses with ';'" th:value="${emailsString}" size="50" required>
+        </div>
+        <div class="btnSubmit">
+            <button type="submit">Save</button>
+        </div>
+    </form>
+</body>
+</html>
