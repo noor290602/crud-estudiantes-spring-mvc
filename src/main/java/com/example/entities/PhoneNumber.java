@@ -9,14 +9,19 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "phone_numbers")
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode
 @Builder
 public class PhoneNumber {
 
@@ -27,6 +32,7 @@ public class PhoneNumber {
     private int id;
     private String number;
 
+    @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     private Student student;
 }

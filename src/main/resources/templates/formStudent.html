@@ -200,6 +200,7 @@
   </header>
 
   <form th:action="@{/students/save}" th:object="${student}" method="post">
+        <input type="hidden" th:field="*{id}">
         <div>
             <label for="name">Name:</label>
             <input type="text" id="name" th:field="*{name}" required>
@@ -227,7 +228,7 @@
             <label for="faculties">Faculties:</label>
             <select id="faculties" th:field="*{faculty}">
                 <option value="" selected>Choose an option please...</option>
-                <option th:each="f : ${listFaculties}" 
+                <option th:each="f : ${facultyList}" 
                         th:value="${f.id}" 
                         th:text="${f.name}"
                         >
@@ -235,12 +236,12 @@
             </select>
         </div>
         <div>
-            <label for="facultyMatriculationDate">Faculty Matriculation Date:</label>
-            <input type="date" name="facultyMatriculationDate" id="facultyMatriculationDate" th:field="*{facultyMatriculationDate}" required>
+            <label for="fMatriculationDate">Faculty Matriculation Date:</label>
+            <input type="date" name="fMatriculationDate" id="fMatriculationDate" th:field="*{facultyMatriculationDate}" required>
         </div>
         <div>
             <label for="phoneNumbers">Phone number(s): </label>
-            <input type="text" id="phoneNumbers" name="phoneNumbersString" placeholder="Separate multiple phone number with ';'" th:value="${phoneNumbersString}" size="50" required>
+            <input type="text" id="phoneNumbers" name="phoneNumbersString" placeholder="Separate multiple phone number with ';'" th:value="${numbersString}" size="50" required>
         </div>
         <div>
             <label for="emails">Email address(es): </label>

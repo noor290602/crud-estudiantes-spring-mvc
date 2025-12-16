@@ -9,14 +9,19 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
-@Table(name = "email_adresses")
+@Table(name = "email_addresses")
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode
 @Builder
 public class EmailAddress {
 
@@ -27,6 +32,7 @@ public class EmailAddress {
     private int id;
     private String email;
 
+    @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     private Student student;
 

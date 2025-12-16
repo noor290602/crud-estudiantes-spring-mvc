@@ -2,6 +2,7 @@ package com.example.controllers;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +22,7 @@ import com.example.services.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -35,7 +37,6 @@ public class StudentController {
     private final FacultyService facultyService;
     private final PhoneNumberService phoneNumberService;
     private final EmailAdressService emailAdressService;
-
 
     @GetMapping("")
     public String index() {
@@ -70,9 +71,7 @@ public class StudentController {
             @RequestParam(name = "emailsString", required = false) String emails,
             @RequestParam(name = "phoneNumbersString", required = false) String phoneNumbers) {
 
-        //LOGGER.info("                                     PHONE NUMBERS" + phoneNumbers);
-
-        LOGGER.info("Student recived: " + student);
+        // TODO: studentPhoto
 
         Student studentSaved = studentService.saveStudent(student);
 
@@ -81,6 +80,12 @@ public class StudentController {
             List<String> phoneNumbersList = Arrays.stream(phoneNumbers.split(";"))
                     .map(String::trim)
                     .toList();
+
+            // Before creating/modifying phone numbers, you must delete the one associated with that student
+
+            if (phoneNumberService.existsByStudent(student)) {
+                phoneNumberService.deleteByStudent(student);
+            }
 
             phoneNumbersList.stream().forEach(phn -> {
                 PhoneNumber phoneNumber = PhoneNumber.builder()
@@ -98,6 +103,13 @@ public class StudentController {
                     .map(String::trim)
                     .toList();
 
+            // Before creating/modifying emails, you must delete the one associated with that student
+
+            if (emailAdressService.existsByStudent(student)) {
+                emailAdressService.deleteByStudent(student);
+            }
+
+
             emailAddressList.forEach(email -> {
                 EmailAddress emailAddress = EmailAddress.builder()
                         .email(email)
@@ -110,4 +122,41 @@ public class StudentController {
         return "redirect:/students/list";
     }
 
+    @GetMapping("/update/{studentId}")
+    public String modifyStudent(@PathVariable("studentId") int studentId, Model model) {
+
+        Student student = studentService.findStudentById(studentId);
+
+        List<Faculty> facultyList = facultyService.findAllFaculties();
+        model.addAttribute("facultyList", facultyList);
+
+        /* Email and phone numbers */
+
+        List<PhoneNumber> phoneNumbersList = phoneNumberService.findAllPhoneNumbers().stream()
+                .filter(phn -> phn.getStudent().equals(student))
+                .toList();
+
+        List<EmailAddress> emailAddressesList = emailAdressService.findAllEmailAddresses().stream()
+                .filter(ea -> ea.getStudent().equals(student))
+                .toList();
+
+        if (!phoneNumbersList.isEmpty() && !emailAddressesList.isEmpty()) {
+
+            String emails = emailAddressesList.stream()
+                    .map(EmailAddress::getEmail)
+                    .collect(Collectors.joining(";"));
+
+            String numbers = phoneNumbersList.stream()
+                    .map(PhoneNumber::getNumber)
+                    .collect(Collectors.joining(";"));
+
+            model.addAttribute("emailsString", emails);
+            model.addAttribute("numbersString", numbers);
+        }
+
+        // studentService.updateStudent(studentId);
+        model.addAttribute("student", student);
+
+        return "formStudent";
+    }
 }

@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 
 import com.example.dao.EmailAdressDAO;
 import com.example.entities.EmailAddress;
+import com.example.entities.Student;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -33,6 +35,22 @@ public class EmailAdressServiceImpl implements EmailAdressService {
     @Override
     public EmailAddress updateEmailAddress(int emailAddressId) {
         return emailAdressDao.save(emailAdressDao.findById(emailAddressId).get());
+    }
+
+    @Override
+    public boolean existsByStudent(Student student) {
+        return emailAdressDao.existsByStudent(student);
+    }
+
+    @Override
+    @Transactional
+    public void deleteByStudent(Student student) {
+        emailAdressDao.deleteByStudent(student);
+    }
+
+    @Override
+    public List<EmailAddress> findByStudent(Student student) {
+        return emailAdressDao.findByStudent(student);
     }
 
 }

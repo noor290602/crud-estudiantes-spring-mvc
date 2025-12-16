@@ -3,6 +3,8 @@ package com.example.entities;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.example.model.Gender;
 
 import jakarta.persistence.CascadeType;
@@ -18,14 +20,18 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "students")
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode
 @Builder
 public class Student {
 
@@ -37,6 +43,8 @@ public class Student {
     private String name;
     private String firstLastName;
     private String secondLastName;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate facultyMatriculationDate;
     
     @Enumerated(EnumType.STRING)
