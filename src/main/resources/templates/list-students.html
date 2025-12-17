@@ -151,7 +151,11 @@
         </a>
     </div>
    
-    <div>
+    <div th:if="${students.isEmpty}" style="color:white;">
+        <p>There are no students registered :(</p>
+    </div>
+
+    <div th:if="${!students.isEmpty}">
         <table>
             <thead>
                 <tr>

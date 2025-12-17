@@ -1,5 +1,7 @@
 package com.example.controllers;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -62,7 +64,7 @@ public class StudentController {
         model.addAttribute("student", student);
 
         List<Faculty> listFaculties = facultyService.findAllFaculties();
-        model.addAttribute("listFaculties", listFaculties);
+        model.addAttribute("facultyList", listFaculties);
 
         return "formStudent";
     }
@@ -185,5 +187,13 @@ public class StudentController {
         return "view-student";
     }
     
+     @GetMapping("/delete/{studentId}")
+    public String eliminarEmpleado(@PathVariable("studentId") int studentId) {
 
+        Student studentToDelete = studentService.findStudentById(studentId);
+
+        studentService.deleteStudent(studentToDelete);
+
+        return "redirect:/students/list";
+    }
 }
