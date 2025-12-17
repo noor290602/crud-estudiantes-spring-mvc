@@ -1,6 +1,7 @@
 package com.example.controllers;
 
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
@@ -21,13 +22,13 @@ import com.example.services.FacultyService;
 import com.example.services.PhoneNumberService;
 import com.example.services.StudentService;
 
-import jakarta.validation.constraints.Email;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/students")
@@ -72,9 +73,25 @@ public class StudentController {
     @PostMapping("/save")
     public String saveStudent(@ModelAttribute("student") Student student,
             @RequestParam(name = "emailsString", required = false) String emails,
-            @RequestParam(name = "phoneNumbersString", required = false) String phoneNumbers) {
+            @RequestParam(name = "phoneNumbersString", required = false) String phoneNumbers,
+            @RequestParam(name= "studentPhoto", required = false) MultipartFile studentImage
+        ) {
 
-        // TODO: studentPhoto
+        if (studentImage != null && !studentImage.isEmpty()) {
+            Path relativePath = Paths.get("src/main/resources/static/images");
+            String absolutePath = relativePath.toFile().getAbsolutePath();
+            Path completePath = Paths.get(absolutePath + "/" + studentImage.getOriginalFilename());
+
+            try {
+                byte[] recivedByteImage = studentImage.getBytes();
+                Files.write(completePath, recivedByteImage);
+                student.setPhoto(studentImage.getOriginalFilename());
+                
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
 
         Student studentSaved = studentService.saveStudent(student);
 
@@ -157,7 +174,7 @@ public class StudentController {
             model.addAttribute("numbersString", numbers);
         }
 
-        // studentService.updateStudent(studentId);
+        studentService.updateStudent(studentId);
         model.addAttribute("student", student);
 
         return "formStudent";
@@ -182,7 +199,8 @@ public class StudentController {
 
         model.addAttribute("emailsStringList", emailsStringList);
 
-        //TODO: student image
+        String studentPhoto = student.getPhoto();
+        model.addAttribute("studentPhoto", studentPhoto);
 
         return "view-student";
     }
@@ -192,8 +210,20 @@ public class StudentController {
 
         Student studentToDelete = studentService.findStudentById(studentId);
 
+         if (studentToDelete.getPhoto() != null) {
+            Path relativePath = Paths.get("src/main/resources/static/images/" + studentToDelete.getPhoto()); 
+
+            if (Files.exists(relativePath)) {
+                try {
+                    Files.delete(relativePath);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
         studentService.deleteStudent(studentToDelete);
 
         return "redirect:/students/list";
     }
+
 }

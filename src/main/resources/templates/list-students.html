@@ -160,6 +160,7 @@
             <thead>
                 <tr>
                     <th>ID</th>
+                    <th>Image</th>
                     <th>Name</th>
                     <th>Surname</th>
                     <th>Faculty Matricularion Date</th>
@@ -172,6 +173,10 @@
             <tbody>
                 <tr th:each="student : ${students}">
                     <td th:text="${student.id}" class="texto-bold"></td>
+                    <td>
+                        <img th:if="${student.photo != null}" th:src="@{/images/} + ${student.photo}" alt="Photo image">
+                        <p th:if="${student.photo == null}">-</p>
+                    </td>
                     <td th:text="${student.name}"></td>
                     <td th:text="${student.firstLastName + ' ' + student.secondLastName}"></td>
                     <td th:text="${student.facultyMatriculationDate}"></td>

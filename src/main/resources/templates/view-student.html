@@ -113,6 +113,20 @@
             justify-content: space-between;
         }
 
+        .info-column {
+            display: flex;
+            flex-direction: row;
+            gap: 1em;
+            
+            div {
+                width: 100%;
+            }
+        }
+
+        .info-photo {
+            display: flex;
+        }
+
         .info-label {
             font-weight: bold;
             color: rgba(0, 112, 173);
@@ -196,21 +210,31 @@
     </header>
 
     <div class="student-card">
-        <div class="info-row">
-            <span class="info-label">Name:</span>
-            <span class="info-value" th:text="${student.name}"></span>
-        </div>
-        <div class="info-row">
-            <span class="info-label">First Surname:</span>
-            <span class="info-value" th:text="${student.firstLastName}"></span>
-        </div>
-        <div class="info-row">
-            <span class="info-label">Second Surname:</span>
-            <span class="info-value" th:text="${student.secondLastName}"></span>
-        </div>
-        <div class="info-row">
-            <span class="info-label">Gender:</span>
-            <span class="info-value" th:text="${student.gender}"></span>
+        <div class="info-column">
+            <div>
+                <div class="info-row">
+                    <span class="info-label">Name:</span>
+                    <span class="info-value" th:text="${student.name}"></span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">First Surname:</span>
+                    <span class="info-value" th:text="${student.firstLastName}"></span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Second Surname:</span>
+                    <span class="info-value" th:text="${student.secondLastName}"></span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Gender:</span>
+                    <span class="info-value" th:text="${student.gender}"></span>
+                </div>
+            </div>
+            <div>
+                <div th:if="${studentPhoto != null}" class="info-photo">
+                    <label for="foto" class="info-label">Photo:</label>
+                    <img th:src="@{/images/}+${studentPhoto}" alt="student image">
+                </div>
+            </div>
         </div>
 
         <div class="section-title">Faculty Information</div>

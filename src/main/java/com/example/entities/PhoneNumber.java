@@ -16,11 +16,12 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "phone_numbers")
+@Table(name = "phoneNumbers")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 @EqualsAndHashCode
 @Builder
 public class PhoneNumber {

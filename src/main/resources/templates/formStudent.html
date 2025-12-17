@@ -199,7 +199,7 @@
     </div>    
   </header>
 
-  <form th:action="@{/students/save}" th:object="${student}" method="post">
+  <form th:action="@{/students/save}" th:object="${student}" method="post" enctype="multipart/form-data">
         <input type="hidden" th:field="*{id}">
         <div>
             <label for="name">Name:</label>
@@ -246,6 +246,10 @@
         <div>
             <label for="emails">Email address(es): </label>
             <input type="text" id="emails" name="emailsString" placeholder="Separate multiple email addresses with ';'" th:value="${emailsString}" size="50" required>
+        </div>
+        <div>
+            <label for="file">Student photo: </label>
+            <input type="file" id="file" name="studentPhoto">
         </div>
         <div class="btnSubmit">
             <button type="submit">Save</button>
