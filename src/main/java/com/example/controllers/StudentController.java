@@ -19,6 +19,7 @@ import com.example.services.FacultyService;
 import com.example.services.PhoneNumberService;
 import com.example.services.StudentService;
 
+import jakarta.validation.constraints.Email;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -159,4 +160,30 @@ public class StudentController {
 
         return "formStudent";
     }
+
+    @GetMapping("/view/{studentId}")
+    public String viewStudent(@PathVariable("studentId") int studentId, Model model) {
+        Student student = studentService.findStudentById(studentId);
+        model.addAttribute("student", student);
+
+        List<PhoneNumber> phoneNumberList = phoneNumberService.findByStudent(student);
+        List<String> numbersStringList = phoneNumberList.stream()
+            .map(n -> n.getNumber())
+            .toList();
+
+        model.addAttribute("numbersStringList", numbersStringList);
+
+        List<EmailAddress> emailAddressesList = emailAdressService.findByStudent(student);
+        List<String> emailsStringList = emailAddressesList.stream()
+            .map(e -> e.getEmail())
+            .toList();
+
+        model.addAttribute("emailsStringList", emailsStringList);
+
+        //TODO: student image
+
+        return "view-student";
+    }
+    
+
 }
