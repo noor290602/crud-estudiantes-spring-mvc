@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,22 +10,22 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
     <style type="text/css">
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: "Inter", sans-serif;    
+            font-family: "Inter", sans-serif;
         }
 
         body {
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
             gap: 2em;
+            height: 100vh;
             background-color: rgba(0, 112, 173);
         }
 
@@ -38,10 +39,12 @@
             margin-bottom: 1em;
             background-color: white;
 
-            img{
+            img {
                 width: 36px;
                 height: auto;
-            };
+            }
+
+            ;
         }
 
         #titulo p {
@@ -55,8 +58,11 @@
         }
 
         .iconos-button {
+            height: 50vh;
+            width: 20%;
+            margin-top: 5em;
             display: flex;
-            justify-content: start;
+            justify-content: center;
             align-items: center;
             border-radius: 8px;
             color: white;
@@ -67,25 +73,35 @@
 
             a {
                 display: flex;
+                flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                gap: 8px;
+                gap: 2em;
+                width: 100%;
+                height: 100%;
                 text-decoration: none;
                 color: white;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
             }
 
             &:hover {
                 background-color: rgba(18, 171, 219);
                 color: white;
                 cursor: pointer;
+                transform: translateY(-5px); 
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
 
                 a span {
                     color: white;
                 }
             }
+
+            img {
+                filter: brightness(0) invert(1);
+            }
         }
 
-        .btnsUniversity{
+        .btnsUniversity {
             width: 100%;
             display: flex;
             justify-content: center;
@@ -95,14 +111,16 @@
 
         footer {
             position: absolute;
+            text-align: center;
+            width: 100%;
             bottom: 10px;
             color: white;
             font-size: 0.9em;
             font-weight: lighter;
         }
-
     </style>
 </head>
+
 <body>
     <div id="titulo">
         <img th:src="@{images/techgemini-logo.jpg}" alt="TechGemini icon">
@@ -111,17 +129,20 @@
 
     <div class="btnsUniversity">
         <div class="iconos-button">
-           <a th:href="@{/professors/list}">
-               <span>Professors list</span>
-           </a>
-       </div>
-       <div class="iconos-button">
-           <a th:href="@{/students/list}">
-               <span>Students list</span>
-           </a>
-       </div>
+            <a th:href="@{/students/list}">
+                <img th:src="@{/images/svg/student.svg}" alt="Hat student icon">
+                <span>Students list</span>
+            </a>
+        </div>
+         <div class="iconos-button">
+            <a th:href="@{/professors/list}">
+                <img th:src="@{/images/svg/professor.svg}" alt="Glasses icon">
+                <span>Professors list</span>
+            </a>
+        </div>
     </div>
 
     <footer>&copy;Copyright 2025-2026 | Noor Aloune Sagouma</footer>
 </body>
+
 </html>

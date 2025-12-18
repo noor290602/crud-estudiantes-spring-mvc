@@ -102,7 +102,7 @@
             filter: brightness(0) invert(1);
         }
 
-        .student-card {
+        .professor-card {
             padding: 2em;
             border-radius: 24px;
             border: 5px solid rgb(0, 87, 134);
@@ -202,40 +202,40 @@
     <header>
         <div id="title">
             <img th:src="@{/images/techgemini-logo.jpg}" alt="Techgemini logo">
-            <h1>Student Information 📋</h1>
+            <h1>Professor Information 📋</h1>
         </div>
         <div class="iconos-button">
-            <a th:href="@{/students/list}">
+            <a th:href="@{/professors/list}">
                 <img th:src="@{/images/svg/volver.svg}" alt="Back icon">
-                <span>Back to student list</span>
+                <span>Back to professors list</span>
             </a>
         </div>
     </header>
 
-    <div class="student-card">
+    <div class="professor-card">
         <div class="info-column">
             <div>
                 <div class="info-row">
                     <span class="info-label">Name:</span>
-                    <span class="info-value" th:text="${student.name}"></span>
+                    <span class="info-value" th:text="${professor.name}"></span>
                 </div>
                 <div class="info-row">
                     <span class="info-label">First Surname:</span>
-                    <span class="info-value" th:text="${student.firstLastName}"></span>
+                    <span class="info-value" th:text="${professor.firstLastName}"></span>
                 </div>
                 <div class="info-row">
                     <span class="info-label">Second Surname:</span>
-                    <span class="info-value" th:text="${student.secondLastName}"></span>
+                    <span class="info-value" th:text="${professor.secondLastName}"></span>
                 </div>
                 <div class="info-row">
                     <span class="info-label">Gender:</span>
-                    <span class="info-value" th:text="${student.gender}"></span>
+                    <span class="info-value" th:text="${professor.gender}"></span>
                 </div>
             </div>
             <div>
-                <div th:if="${studentPhoto != null}" class="info-photo">
+                <div th:if="${professorPhoto != null}" class="info-photo">
                     <label for="foto" class="info-label">Photo:</label>
-                    <img th:src="@{/images/}+${studentPhoto}" alt="student image">
+                    <img th:src="@{/images/}+${professorPhoto}" alt="professor image">
                 </div>
             </div>
         </div>
@@ -243,25 +243,11 @@
         <div class="section-title">Faculty Information</div>
         <div class="info-row">
             <span class="info-label">Faculty:</span>
-            <span class="info-value" th:text="${student.faculty.name}"></span>
+            <span class="info-value" th:text="${professor.faculty.name}"></span>
         </div>
         <div class="info-row">
             <span class="info-label">Matriculation Date:</span>
-            <span class="info-value" th:text="${student.facultyMatriculationDate}"></span>
-        </div>
-
-        <div class="section-title">Contact Information</div>
-        <div class="info-row">
-            <span class="info-label">Phone Number(s):</span>
-            <span class="info-value">
-                <div th:each="phone : ${numbersStringList}" th:text="${phone}"></div>
-            </span>
-        </div>
-        <div class="info-row">
-            <span class="info-label">Email(s):</span>
-            <span class="info-value">
-                <div th:each="email : ${emailsStringList}" th:text="${email}"></div>
-            </span>
+            <span class="info-value" th:text="${professor.facultyMatriculationDate}"></span>
         </div>
     </div>
 </body>
