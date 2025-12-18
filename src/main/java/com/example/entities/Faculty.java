@@ -38,4 +38,7 @@ public class Faculty {
     @ToString.Exclude
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "faculty", cascade = CascadeType.REMOVE)
     private List<Student> students;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "faculty")
+    private List<Professor> professorsList;
 }

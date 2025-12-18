@@ -85,6 +85,14 @@
             }
         }
 
+        .btnsUniversity{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20%;
+        }
+
         footer {
             position: absolute;
             bottom: 10px;
@@ -100,10 +108,18 @@
         <img th:src="@{images/techgemini-logo.jpg}" alt="TechGemini icon">
         <h1>Techgemini University Managment 🏫</h1>
     </div>
-    <div class="iconos-button">
-        <a th:href="@{/students/list}">
-            <span>Student list</span>
-        </a>
+
+    <div class="btnsUniversity">
+        <div class="iconos-button">
+           <a th:href="@{/professors/list}">
+               <span>Professors list</span>
+           </a>
+       </div>
+       <div class="iconos-button">
+           <a th:href="@{/students/list}">
+               <span>Students list</span>
+           </a>
+       </div>
     </div>
 
     <footer>&copy;Copyright 2025-2026 | Noor Aloune Sagouma</footer>

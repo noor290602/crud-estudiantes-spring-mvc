@@ -10,11 +10,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.example.entities.EmailAddress;
 import com.example.entities.Faculty;
 import com.example.entities.PhoneNumber;
+import com.example.entities.Professor;
 import com.example.entities.Student;
 import com.example.model.Gender;
 import com.example.services.EmailAdressService;
 import com.example.services.FacultyService;
 import com.example.services.PhoneNumberService;
+import com.example.services.ProfessorService;
 import com.example.services.StudentService;
 
 import lombok.RequiredArgsConstructor;
@@ -27,6 +29,7 @@ public class CrudEstudiantesSpringMvcApplication implements CommandLineRunner {
 	private final FacultyService facultyService;
 	private final EmailAdressService emailAdressService;
 	private final PhoneNumberService phoneNumberService;
+	private final ProfessorService professorService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CrudEstudiantesSpringMvcApplication.class, args);
@@ -122,6 +125,96 @@ public class CrudEstudiantesSpringMvcApplication implements CommandLineRunner {
 		phoneNumberService.savePhoneNumber(p7);
 		phoneNumberService.savePhoneNumber(p8);
 		
+		/* PROFESSORS */
+		Professor pr1 = Professor.builder()
+			.name("Leyla")
+			.firstLastName("Aloune")
+			.secondLastName("Sagouma")
+			.facultyMatriculationDate(LocalDate.of(1982, Month.JANUARY, 12))
+			.gender(Gender.FEMALE)
+			.faculty(f1)
+			.salary(2500)
+			.build();
+		
+		Professor pr2 = Professor.builder()
+			.name("Javier")
+			.firstLastName("Caverni")
+			.secondLastName("Ibáñez")
+			.facultyMatriculationDate(LocalDate.of(2005, Month.SEPTEMBER, 1))
+			.gender(Gender.MALE)
+			.faculty(f1)
+			.salary(3200)
+			.build();
+
+		Professor pr3 = Professor.builder()
+			.name("Paula")
+			.firstLastName("Collazos")
+			.secondLastName("Fernández")
+			.facultyMatriculationDate(LocalDate.of(2010, Month.FEBRUARY, 15))
+			.gender(Gender.FEMALE)
+			.faculty(f1)
+			.salary(3400)
+			.build();
+
+		Professor pr4 = Professor.builder()
+			.name("Noah")
+			.firstLastName("Santos")
+			.secondLastName("López")
+			.facultyMatriculationDate(LocalDate.of(2018, Month.MARCH, 10))
+			.gender(Gender.OTHER)
+			.faculty(f1)
+			.salary(2900)
+			.build();
+
+		Professor pr5 = Professor.builder()
+			.name("María")
+			.firstLastName("García")
+			.secondLastName("Ruiz")
+			.facultyMatriculationDate(LocalDate.of(1999, Month.JULY, 23))
+			.gender(Gender.FEMALE)
+			.faculty(f2)
+			.salary(3600)
+			.build();
+
+		Professor pr6 = Professor.builder()
+			.name("Alejandro")
+			.firstLastName("Ortega")
+			.secondLastName("Vidal")
+			.facultyMatriculationDate(LocalDate.of(2001, Month.NOVEMBER, 5))
+			.gender(Gender.MALE)
+			.faculty(f2)
+			.salary(3100)
+			.build();
+
+		Professor pr7 = Professor.builder()
+			.name("Elena")
+			.firstLastName("Martínez")
+			.secondLastName("Pérez")
+			.facultyMatriculationDate(LocalDate.of(2016, Month.APRIL, 18))
+			.gender(Gender.FEMALE)
+			.faculty(f2)
+			.salary(3000)
+			.build();
+
+		Professor pr8 = Professor.builder()
+			.name("Héctor")
+			.firstLastName("Navarro")
+			.secondLastName("Serrano")
+			.facultyMatriculationDate(LocalDate.of(2012, Month.DECEMBER, 3))
+			.gender(Gender.MALE)
+			.faculty(f2) 
+			.salary(3350)
+			.build();
+
+		professorService.saveProfessor(pr1);
+		professorService.saveProfessor(pr2);
+		professorService.saveProfessor(pr3);
+		professorService.saveProfessor(pr4);
+		professorService.saveProfessor(pr5);
+		professorService.saveProfessor(pr6);
+		professorService.saveProfessor(pr7);
+		professorService.saveProfessor(pr8);
+
 	}
 
 }

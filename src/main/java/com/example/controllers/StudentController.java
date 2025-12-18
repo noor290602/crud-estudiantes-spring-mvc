@@ -42,12 +42,6 @@ public class StudentController {
     private final PhoneNumberService phoneNumberService;
     private final EmailAdressService emailAdressService;
 
-    @GetMapping("")
-    public String index() {
-        LOGGER.info("Index page");
-        return "index";
-    }
-
     @GetMapping("/list")
     public String listStudents(Model model) {
         LOGGER.info("Listing students");
